@@ -1,3 +1,10 @@
+/**
+ * @name Taint Tracking RCE U-Boot
+ * @description Ricerca di dati di rete non validati che finiscono in memcpy.
+ * @kind problem
+ * @problem.severity error
+ * @id cpp/u-boot-rce-taint
+ */
 import cpp
 import semmle.code.cpp.dataflow.TaintTracking
 

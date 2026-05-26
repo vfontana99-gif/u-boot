@@ -25,7 +25,7 @@ jobs:
     - name: Install Build Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential bc bison flex libssl-dev swig python3-dev libsdl2-dev uuid-dev pkg-config libgnutls28-dev
+        sudo apt-get install -y build-essential bc bison flex libssl-dev swig python3-dev libsdl2-dev uuid-dev pkg-config libgnutls28-dev device-tree-compiler python3-setuptools
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v4
@@ -34,10 +34,10 @@ jobs:
         queries: ./.github/custom-queries/taint_tracking.ql
         build-mode: manual
 
-    - name: Run manual build steps (U-Boot Sandbox God Mode)
+    - name: Run manual build steps (Verbose)
       run: |
         make sandbox_defconfig
-        make NO_SDL=1 KCFLAGS="-Wno-error" -j$(nproc)
+        make NO_SDL=1 KCFLAGS="-Wno-error" V=1 -j$(nproc)
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
